@@ -22,12 +22,8 @@
 					cos(sin(rs.z*tick/100.0)*80.0*rv.z*p.y+sin(rs.w*tick/100.0)*80.0*rv.w*p.x));
 	}
 	
-	vec3 vpow(vec3 v){
-		vec3 t = v;
-		for(int i=0; i<2; i++){
-			t *= v;
-		}
-		return t;
+	vec3 vpow(vec3 v,float p){
+		return vec3(pow(v.x,p),pow(v.y,p),pow(v.z,p));
 	}
 	
     void main(void) {
@@ -38,7 +34,7 @@
 			p += dt*line_func(p);
 			color += texture2D(uSampler, p).xyz;
 		}
-		gl_FragColor = vec4(normalize(vpow(color)),1);;
+		gl_FragColor = vec4(normalize(vpow(color, 2.0)),1);;
         //gl_FragColor = abs(sin(coords)) + texture2D(uSampler, vec2(coords.x, coords.y));
     }
 </script>
